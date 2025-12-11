@@ -201,11 +201,33 @@ class RAGEngine:
         # Retrieve relevant chunks
         chunks = self.query(query, top_k=top_k)
         
+        # If no relevant documents found, use general knowledge
         if not chunks:
+            logger.info("No relevant documents found, using general knowledge")
+            system_prompt = """You are Bhuvi's personal AI assistant. You're helpful, friendly, and conversational.
+
+Answer the user's question using your general knowledge. Be:
+- Conversational and natural (like talking to a friend)
+- Helpful and informative
+- Concise but complete
+- Professional yet approachable
+
+If the question is about you or your capabilities, explain that you're Bhuvi's AI assistant that can help with:
+- Searching personal documents (RAG)
+- Managing emails (Gmail)
+- Creating LinkedIn content
+- General questions and conversations"""
+            
+            answer = llm_chat.generate_response(
+                query,
+                system_prompt=system_prompt,
+                temperature=0.7
+            )
+            
             return {
-                "answer": "I don't have any relevant information in your documents to answer this question.",
+                "answer": answer,
                 "sources": [],
-                "method": "no_context"
+                "method": "general_knowledge"
             }
         
         # Build context from chunks
@@ -214,19 +236,24 @@ class RAGEngine:
             for chunk in chunks
         ])
         
-        # Generate answer with LLM
-        system_prompt = f"""Answer the user's question based ONLY on the following context from their personal documents.
-If the context doesn't contain relevant information, say so.
-Be specific and cite which document the information comes from.
+        # Generate answer with LLM using document context
+        system_prompt = f"""You are Bhuvi's personal AI assistant. Answer the question based on the context from their documents.
 
-Context:
+Be conversational and natural. If the context has the answer, use it and cite the source.
+If the context doesn't fully answer the question, use what's available and supplement with general knowledge.
+
+Context from documents:
 {context}
-"""
+
+Remember to:
+- Be friendly and conversational
+- Cite sources when using document information
+- Supplement with general knowledge if needed"""
         
         answer = llm_chat.generate_response(
             query,
             system_prompt=system_prompt,
-            temperature=0.3
+            temperature=0.5
         )
         
         # Extract unique sources

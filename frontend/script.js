@@ -1,11 +1,11 @@
 // Ultra-Premium 3D Holographic UI - Enhanced Script
 
-// Initialize particle system
+// Initialize particle system - Enhanced
 function createParticles() {
     const particleContainer = document.getElementById('particles');
     if (!particleContainer) return;
 
-    const particleCount = 50;
+    const particleCount = 100; // Increased for denser effect
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -14,6 +14,12 @@ function createParticles() {
         particle.style.top = Math.random() * 100 + '%';
         particle.style.animationDelay = Math.random() * 15 + 's';
         particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+
+        // Add size variation
+        const size = 2 + Math.random() * 3;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+
         particleContainer.appendChild(particle);
     }
 }
@@ -38,10 +44,40 @@ const charCount = document.getElementById('char-count');
 const welcomeTime = document.getElementById('welcome-time');
 
 // Initialize
+let currentMode = 'chat'; // Default mode
+
+function selectMode(mode) {
+    currentMode = mode;
+
+    // Update UI Badges
+    document.querySelectorAll('.module-badge').forEach(badge => {
+        if (badge.dataset.mode === mode) {
+            badge.classList.add('active');
+        } else {
+            badge.classList.remove('active');
+        }
+    });
+
+    // Update Input Placeholder based on Mode
+    const placeholders = {
+        'rag': 'Search documents or ask technical queries...',
+        'gmail': 'Draft emails, summarize inbox, or generate replies...',
+        'linkedin': 'Generate posts, hooks, or optimize profile...',
+        'chat': 'Ask me anything... (General Chat)'
+    };
+
+    if (messageInput) {
+        messageInput.placeholder = placeholders[mode] || placeholders['chat'];
+        messageInput.focus();
+    }
+}
+// Initialize
 function initializeChat() {
     checkBackendStatus();
+    setInterval(checkBackendStatus, 10000); // Auto-check connection every 10s
     setupEventListeners();
     setWelcomeTime();
+    selectMode('chat');
 }
 
 // Set welcome message time
@@ -155,7 +191,10 @@ async function handleSend() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ query: message }),
+            body: JSON.stringify({
+                query: message,
+                mode: currentMode
+            }),
         });
 
         if (!response.ok) {

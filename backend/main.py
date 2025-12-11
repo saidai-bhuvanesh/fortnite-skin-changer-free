@@ -49,6 +49,7 @@ answer_builder = None
 class ChatRequest(BaseModel):
     query: str
     context: Optional[str] = None
+    mode: Optional[str] = "chat"
 
 class ChatResponse(BaseModel):
     answer: str
@@ -169,11 +170,18 @@ async def chat(request: ChatRequest):
         logger.info(f"📩 User Query: {query}")
 
         # Extract intent
-        intent_data = llm_chat.extract_intent(query)
-        primary_intent = intent_data["primary_intent"]
-        secondary_intents = intent_data.get("secondary_intents", [])
+        if request.mode and request.mode != "chat":
+            # Explicit mode selected by user
+            primary_intent = request.mode
+            secondary_intents = []
+            logger.info(f"Using explicit mode: {primary_intent}")
+        else:
+            # Auto-detect intent from query (Chat Mode)
+            intent_data = llm_chat.extract_intent(query)
+            primary_intent = intent_data["primary_intent"]
+            secondary_intents = intent_data.get("secondary_intents", [])
 
-        logger.info(f"Intent: {primary_intent}, Secondary: {secondary_intents}")
+        logger.info(f"Final Intent: {primary_intent}, Secondary: {secondary_intents}")
 
         # Route to modules
         module_responses = {}
