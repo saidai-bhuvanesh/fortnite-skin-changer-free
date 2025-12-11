@@ -1,0 +1,39 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# ChromaDB
+chroma_db/
+*.db
+*.sqlite
+
+# Logs
+*.log
+logs/
+
+# OAuth tokens
+token.json
+credentials.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documents (add your docs manually)
+docs/*
+!docs/README.md

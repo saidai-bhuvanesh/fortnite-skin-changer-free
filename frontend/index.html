@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhuvi AI Assistant - Personal AI Secretary</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Particle Dust System -->
+    <div class="particle-system" id="particles"></div>
+
+    <!-- Floating 3D Geometric Shapes -->
+    <div class="geometric-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Tech Grid Underneath -->
+    <div class="tech-grid"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🤖</div>
+                    <div class="logo-text">
+                        <h1>Bhuvi AI Assistant</h1>
+                        <p class="subtitle">Your Personal AI Secretary</p>
+                    </div>
+                </div>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="status-text">Initializing...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Module Status Badges -->
+        <div class="modules-status">
+            <div class="module-badge" data-module="rag">
+                <span class="badge-icon">📚</span>
+                <span class="badge-label">RAG Engine</span>
+            </div>
+            <div class="module-badge" data-module="gmail">
+                <span class="badge-icon">📧</span>
+                <span class="badge-label">Gmail</span>
+            </div>
+            <div class="module-badge" data-module="linkedin">
+                <span class="badge-icon">💼</span>
+                <span class="badge-label">LinkedIn</span>
+            </div>
+            <div class="module-badge" data-module="chat">
+                <span class="badge-icon">💬</span>
+                <span class="badge-label">Chat</span>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <main class="chat-container">
+            <div class="messages" id="messages">
+                <!-- Welcome Message -->
+                <div class="message assistant-message welcome-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">Bhuvi AI Assistant</span>
+                            <span class="message-time" id="welcome-time"></span>
+                        </div>
+                        <div class="message-text">
+                            <h3>👋 Welcome! I'm your personal AI assistant.</h3>
+                            <p>I can help you with:</p>
+                            <ul>
+                                <li><strong>📚 Document Intelligence</strong> - Search your resume, projects, and
+                                    personal documents</li>
+                                <li><strong>📧 Email Management</strong> - Summarize your inbox and draft replies</li>
+                                <li><strong>💼 LinkedIn Content</strong> - Generate professional posts, captions, and
+                                    comments</li>
+                                <li><strong>💬 General Assistance</strong> - Answer questions and provide insights</li>
+                            </ul>
+                            <p class="welcome-cta">Try asking: <em>"Summarize my resume"</em> or <em>"Check my
+                                    emails"</em> or <em>"Create a LinkedIn post about AI"</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typing-indicator" style="display: none;">
+                <div class="message-avatar">🤖</div>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea id="message-input"
+                    placeholder="Ask me anything... (e.g., 'Check my emails', 'Create a LinkedIn post')" rows="1"
+                    maxlength="2000"></textarea>
+                <button id="send-button" class="send-button" aria-label="Send message">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="input-footer">
+                <span class="char-count"><span id="char-count">0</span>/2000</span>
+                <span class="quick-actions">
+                    <button class="quick-action" data-query="Summarize my latest documents">📚 My Docs</button>
+                    <button class="quick-action" data-query="Check my unread emails">📧 Emails</button>
+                    <button class="quick-action" data-query="Create a LinkedIn post about AI and automation">💼
+                        LinkedIn</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
