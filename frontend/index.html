@@ -6,12 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhuvi AI Assistant - Personal AI Secretary</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="toolbox.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Transparent AI Robot Background -->
-    <div class="bg-robot"></div>
+    <!-- LAYER 1: Clean Background (No Robot) -->
+    <div class="bg-dim"></div>
+
+    <!-- LAYER 2: Animated Effects (Behind UI) -->
+    <div class="cyber-animation"></div>
+    <div class="hud-shape"></div>
+
+    <!-- Ultra-Realistic 3D Cyber Backgrounds -->
+    <!-- Layer 1: Cyberpunk City Backdrop (Deepest) -->
+    <div class="cyber-layer cyber-city-layer"></div>
+
+    <!-- Layer 2: Network Nodes (Mid-depth) -->
+    <div class="cyber-layer cyber-network-layer"></div>
+
+    <!-- Layer 3: Data Terminal (Closer) -->
+    <div class="cyber-layer cyber-terminal-layer"></div>
+
+    <!-- Layer 4: Holographic Display (Closest) -->
+    <div class="cyber-layer cyber-hologram-layer"></div>
 
     <!-- Animated Particle Dust System -->
     <div class="particle-system" id="particles"></div>
@@ -26,6 +44,196 @@
     <!-- Tech Grid Underneath -->
     <div class="tech-grid"></div>
 
+    <!-- Advanced Cyber Effects -->
+    <!-- 3D Floating Cyber Cubes -->
+    <div class="cyber-cubes">
+        <div class="cyber-cube cube-1"></div>
+        <div class="cyber-cube cube-2"></div>
+        <div class="cyber-cube cube-3"></div>
+        <div class="cyber-cube cube-4"></div>
+        <div class="cyber-cube cube-5"></div>
+    </div>
+
+    <!-- Data Stream Lines -->
+    <div class="data-streams">
+        <div class="data-stream stream-1"></div>
+        <div class="data-stream stream-2"></div>
+        <div class="data-stream stream-3"></div>
+        <div class="data-stream stream-4"></div>
+    </div>
+
+    <!-- Holographic Panels -->
+    <div class="holo-panels">
+        <div class="holo-panel panel-1"></div>
+        <div class="holo-panel panel-2"></div>
+    </div>
+
+    <!-- Circuit Board Pattern -->
+    <div class="circuit-board"></div>
+
+    <!-- Matrix Code Rain -->
+    <div class="matrix-rain" id="matrix-rain"></div>
+
+    <!-- ADVANCED HACKER/CYBER EFFECTS -->
+    <!-- Digital Scanlines (CRT Monitor Effect) -->
+    <div class="digital-scanlines"></div>
+
+    <!-- Hexagonal Grid Overlay -->
+    <div class="hex-grid-overlay"></div>
+
+    <!-- Binary Code Rain -->
+    <div class="binary-rain" id="binary-rain"></div>
+
+    <!-- Glitch Effect Overlay -->
+    <div class="glitch-overlay"></div>
+
+    <!-- Terminal Cursor Blink -->
+    <div class="terminal-cursor"></div>
+
+    <!-- 3D Rotating Wireframe -->
+    <div class="wireframe-3d">
+        <div class="wireframe-cube"></div>
+    </div>
+
+    <!-- Data Packet Stream -->
+    <div class="data-packets">
+        <div class="packet packet-1"></div>
+        <div class="packet packet-2"></div>
+        <div class="packet packet-3"></div>
+        <div class="packet packet-4"></div>
+    </div>
+
+    <!-- Radar Sweep Effect -->
+    <div class="radar-sweep"></div>
+
+    <!-- Digital Noise Texture -->
+    <canvas id="noise-canvas" class="noise-canvas"></canvas>
+
+    <!-- UNIQUE 3D CYBER MODELS FOR EMPTY SPACE -->
+    <!-- Floating DNA Helix -->
+    <div class="dna-helix">
+        <div class="dna-strand strand-1"></div>
+        <div class="dna-strand strand-2"></div>
+    </div>
+
+    <!-- Orbiting Satellites -->
+    <div class="satellite-orbit">
+        <div class="satellite sat-1"></div>
+        <div class="satellite sat-2"></div>
+        <div class="satellite sat-3"></div>
+    </div>
+
+    <!-- Pulsing Energy Core -->
+    <div class="energy-core">
+        <div class="core-ring ring-1"></div>
+        <div class="core-ring ring-2"></div>
+        <div class="core-ring ring-3"></div>
+        <div class="core-center"></div>
+    </div>
+
+    <!-- Holographic Brain -->
+    <div class="holo-brain">
+        <div class="brain-hemisphere left"></div>
+        <div class="brain-hemisphere right"></div>
+        <div class="brain-waves"></div>
+    </div>
+
+    <!-- Animated Circuit Pathways -->
+    <svg class="circuit-pathways" viewBox="0 0 400 400">
+        <path class="circuit-path path-1" d="M 50 50 L 150 50 L 150 150 L 250 150" />
+        <path class="circuit-path path-2" d="M 350 50 L 250 50 L 250 200 L 150 200" />
+        <path class="circuit-path path-3" d="M 50 350 L 150 350 L 150 250 L 300 250" />
+        <circle class="circuit-node" cx="150" cy="50" r="5" />
+        <circle class="circuit-node" cx="150" cy="150" r="5" />
+        <circle class="circuit-node" cx="250" cy="50" r="5" />
+        <circle class="circuit-node" cx="150" cy="200" r="5" />
+        <circle class="circuit-node" cx="150" cy="350" r="5" />
+        <circle class="circuit-node" cx="150" cy="250" r="5" />
+    </svg>
+
+    <!-- Floating Geometric Polyhedron -->
+    <div class="polyhedron">
+        <div class="poly-face face-1"></div>
+        <div class="poly-face face-2"></div>
+        <div class="poly-face face-3"></div>
+        <div class="poly-face face-4"></div>
+    </div>
+
+    <!-- Additional Elements to Fill Empty Space -->
+    <!-- Floating Code Snippets -->
+    <div class="floating-code">
+        <div class="code-snippet snippet-1">const ai = new Assistant();</div>
+        <div class="code-snippet snippet-2">function process() { ... }</div>
+        <div class="code-snippet snippet-3">import { brain } from 'ai';</div>
+    </div>
+
+    <!-- Animated Grid Lines -->
+    <div class="grid-lines">
+        <div class="grid-line horizontal line-1"></div>
+        <div class="grid-line horizontal line-2"></div>
+        <div class="grid-line vertical line-3"></div>
+        <div class="grid-line vertical line-4"></div>
+    </div>
+
+    <!-- Pulsing Dots Network -->
+    <div class="dots-network">
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
+        <div class="dot dot-4"></div>
+        <div class="dot dot-5"></div>
+        <div class="dot dot-6"></div>
+    </div>
+
+    <!-- LAYER 4: Robot Foreground (Above Everything) -->
+    <div class="robot-fore">
+        <img src="ai_robot.png" class="robot-img" alt="AI Agent">
+    </div>
+
+    <!-- Side AI Toolbox Panel -->
+    <div class="ai-toolbox" id="aiToolbox">
+        <button class="toolbox-toggle" onclick="toggleToolbox()" title="AI Tools">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="toolbox-panel">
+            <div class="toolbox-header">
+                <h3>AI Toolbox</h3>
+                <button class="toolbox-close" onclick="toggleToolbox()">×</button>
+            </div>
+            <div class="toolbox-content">
+                <div class="tool-item" onclick="selectTool('document')">
+                    <span class="tool-icon">📝</span>
+                    <span class="tool-label">Document Analyzer</span>
+                </div>
+                <div class="tool-item" onclick="selectTool('email')">
+                    <span class="tool-icon">📧</span>
+                    <span class="tool-label">Email Summarizer</span>
+                </div>
+                <div class="tool-item" onclick="selectTool('resume')">
+                    <span class="tool-icon">💼</span>
+                    <span class="tool-label">Resume Scanner</span>
+                </div>
+                <div class="tool-item" onclick="selectTool('project')">
+                    <span class="tool-icon">📊</span>
+                    <span class="tool-label">Project Analyzer</span>
+                </div>
+                <div class="tool-item" onclick="selectTool('linkedin')">
+                    <span class="tool-icon">🔗</span>
+                    <span class="tool-label">LinkedIn Generator</span>
+                </div>
+                <div class="tool-item" onclick="selectTool('brain')">
+                    <span class="tool-icon">🧠</span>
+                    <span class="tool-label">Personal Brain</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LAYER 3: Main UI Panels -->
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -37,30 +245,51 @@
                         <p>YOUR PERSONAL AI SECRETARY</p>
                     </div>
                 </div>
-                <div class="status-indicator">
-                    <span class="status-dot"></span>
-                    <span id="status-text">Online</span>
-                </div>
-            </div>
         </header>
 
         <!-- Module Status Badges -->
         <div class="modules-status">
             <div class="module-badge" data-mode="rag" onclick="selectMode('rag')" title="Standard RAG Mode">
-                <span class="badge-icon">📑</span>
+                <span class="badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </span>
                 <span class="badge-label">RAG Engine</span>
             </div>
             <div class="module-badge" data-mode="gmail" onclick="selectMode('gmail')" title="Email Intelligence Mode">
-                <span class="badge-icon">📧</span>
+                <span class="badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </span>
                 <span class="badge-label">Gmail</span>
             </div>
             <div class="module-badge" data-mode="linkedin" onclick="selectMode('linkedin')"
                 title="LinkedIn Growth Mode">
-                <span class="badge-icon">💼</span>
+                <span class="badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                </span>
                 <span class="badge-label">LinkedIn</span>
             </div>
             <div class="module-badge active" data-mode="chat" onclick="selectMode('chat')" title="General AI Chat Mode">
-                <span class="badge-icon">💬</span>
+                <span class="badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </span>
                 <span class="badge-label">Chat</span>
             </div>
         </div>

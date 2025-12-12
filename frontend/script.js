@@ -24,14 +24,210 @@ function createParticles() {
     }
 }
 
+// Create Matrix Code Rain Effect
+function createMatrixRain() {
+    const matrixContainer = document.getElementById('matrix-rain');
+    if (!matrixContainer) return;
+
+    const characters = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ01';
+    const columnCount = Math.floor(window.innerWidth / 20);
+
+    for (let i = 0; i < columnCount; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        column.style.left = `${i * 20}px`;
+        column.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        column.style.animationDelay = `${Math.random() * 5}s`;
+
+        let text = '';
+        const length = Math.floor(Math.random() * 20) + 10;
+        for (let j = 0; j < length; j++) {
+            text += characters.charAt(Math.floor(Math.random() * characters.length)) + '\n';
+        }
+        column.textContent = text;
+        matrixContainer.appendChild(column);
+    }
+}
+
+// Part C: Robot Parallax Effect
+document.addEventListener("mousemove", (e) => {
+    const robotContainer = document.querySelector('.robot-container');
+    if (robotContainer) {
+        // Reduced movement factor for subtler effect
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
+        // Only Apply Translate. Scale is handled by CSS animation on the child img.
+        robotContainer.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    }
+});
+
+// ========================================
+// AI TOOLBOX PANEL FUNCTIONS
+// ========================================
+
+// Toggle Toolbox Panel
+function toggleToolbox() {
+    const toolbox = document.getElementById('aiToolbox');
+    toolbox.classList.toggle('open');
+}
+
+// Select Tool
+let currentTool = null;
+
+function selectTool(toolName) {
+    // Remove active class from all tools
+    document.querySelectorAll('.tool-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // Add active class to selected tool
+    event.currentTarget.classList.add('active');
+    currentTool = toolName;
+
+    // Update chat placeholder based on tool
+    const input = document.getElementById('message-input');
+    const toolMessages = {
+        document: 'Upload or describe a document to analyze...',
+        email: 'Paste email content to summarize...',
+        resume: 'Upload or paste resume content...',
+        project: 'Describe your project for analysis...',
+        linkedin: 'What type of LinkedIn content do you need?',
+        brain: 'Ask me anything from your personal knowledge base...'
+    };
+
+    if (input) {
+        input.placeholder = toolMessages[toolName] || 'Ask me anything... (General Chat)';
+    }
+
+    // Show notification
+    showToolNotification(toolName);
+}
+
+// Show Tool Selection Notification
+function showToolNotification(toolName) {
+    const toolNames = {
+        document: 'Document Analyzer',
+        email: 'Email Summarizer',
+        resume: 'Resume Scanner',
+        project: 'Project Analyzer',
+        linkedin: 'LinkedIn Generator',
+        brain: 'Personal Brain'
+    };
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'tool-notification';
+    notification.textContent = `✓ ${toolNames[toolName]} activated`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, rgba(0, 247, 255, 0.9), rgba(160, 102, 255, 0.9));
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        z-index: 200;
+        animation: slideDown 0.5s ease, fadeOut 0.5s ease 2.5s;
+        box-shadow: 0 4px 20px rgba(0, 247, 255, 0.5);
+    `;
+
+    document.body.appendChild(notification);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Add notification animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+    
+    @keyframes fadeOut {
+        to {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Create Binary Code Rain Effect
+function createBinaryRain() {
+    const binaryContainer = document.getElementById('binary-rain');
+    if (!binaryContainer) return;
+
+    const columnCount = Math.floor(window.innerWidth / 25);
+
+    for (let i = 0; i < columnCount; i++) {
+        const column = document.createElement('div');
+        column.className = 'binary-column';
+        column.style.left = `${i * 25}px`;
+        column.style.animationDuration = `${Math.random() * 8 + 8}s`;
+        column.style.animationDelay = `${Math.random() * 4}s`;
+
+        let text = '';
+        const length = Math.floor(Math.random() * 15) + 8;
+        for (let j = 0; j < length; j++) {
+            text += (Math.random() > 0.5 ? '1' : '0') + '\n';
+        }
+        column.textContent = text;
+        binaryContainer.appendChild(column);
+    }
+}
+
+// Create Digital Noise Texture
+function createDigitalNoise() {
+    const canvas = document.getElementById('noise-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function drawNoise() {
+        const imageData = ctx.createImageData(canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            const value = Math.random() * 255;
+            data[i] = value;     // Red
+            data[i + 1] = value; // Green
+            data[i + 2] = value; // Blue
+            data[i + 3] = 255;   // Alpha
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+    }
+
+    // Update noise every 100ms for subtle animation
+    setInterval(drawNoise, 100);
+    drawNoise();
+}
+
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
+    createMatrixRain();
+    createBinaryRain();
+    createDigitalNoise();
     initializeChat();
 });
 
 // Rest of the existing script.js code...
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:5000';
 let isProcessing = false;
 
 // DOM Elements

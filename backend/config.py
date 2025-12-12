@@ -46,8 +46,8 @@ class Settings(BaseSettings):
     
     # Server Configuration
     api_host: str = "0.0.0.0"
-    api_port: int = 8000
-    cors_origins: str = "http://localhost:3000,http://localhost:8080,http://127.0.0.1:5500"
+    api_port: int = 5000
+    cors_origins: str = "http://localhost:3000,http://localhost:8080,http://127.0.0.1:5500,http://localhost:5500"
     
     # Logging
     log_level: str = "INFO"
