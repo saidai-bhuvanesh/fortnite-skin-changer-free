@@ -7,10 +7,22 @@
     <title>Bhuvi AI Assistant - Personal AI Secretary</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="toolbox.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="toolbox-header.css">
+    <link rel="stylesheet" href="command-palette.css">
+    <link rel="stylesheet" href="premium-refinements.css">
+    <link rel="stylesheet" href="feature-cards.css">
+    <link rel="stylesheet" href="layout-fix.css">
+    <link rel="stylesheet" href="profile-chip.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
+    <!-- Hologram Grid Overlay -->
+    <div class="hologram-grid-overlay"></div>
+
     <!-- LAYER 1: Clean Background (No Robot) -->
     <div class="bg-dim"></div>
 
@@ -161,11 +173,7 @@
 
     <!-- Additional Elements to Fill Empty Space -->
     <!-- Floating Code Snippets -->
-    <div class="floating-code">
-        <div class="code-snippet snippet-1">const ai = new Assistant();</div>
-        <div class="code-snippet snippet-2">function process() { ... }</div>
-        <div class="code-snippet snippet-3">import { brain } from 'ai';</div>
-    </div>
+    <!-- Floating Code Snippets REMOVED for clarity -->
 
     <!-- Animated Grid Lines -->
     <div class="grid-lines">
@@ -175,181 +183,334 @@
         <div class="grid-line vertical line-4"></div>
     </div>
 
-    <!-- Pulsing Dots Network -->
-    <div class="dots-network">
-        <div class="dot dot-1"></div>
-        <div class="dot dot-2"></div>
-        <div class="dot dot-3"></div>
-        <div class="dot dot-4"></div>
-        <div class="dot dot-5"></div>
-        <div class="dot dot-6"></div>
+    <!-- Dots Network Removed -->
+
+    <!-- LAYER 1: Decorative Layer (Robots, fixed icons) -->
+    <div class="decor-layer">
+        <div class="robot-fore">
+            <img src="ai_robot.png" class="robot-img" alt="AI Agent">
+        </div>
     </div>
 
-    <!-- LAYER 4: Robot Foreground (Above Everything) -->
-    <div class="robot-fore">
-        <img src="ai_robot.png" class="robot-img" alt="AI Agent">
-    </div>
-
-    <!-- Side AI Toolbox Panel -->
-    <div class="ai-toolbox" id="aiToolbox">
-        <button class="toolbox-toggle" onclick="toggleToolbox()" title="AI Tools">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
-        <div class="toolbox-panel">
-            <div class="toolbox-header">
-                <h3>AI Toolbox</h3>
-                <button class="toolbox-close" onclick="toggleToolbox()">×</button>
+    <!-- LAYER 2: App UI Layer (Interactive) -->
+    <div class="app-ui">
+        <!-- Floating Tools Menu (Top Right - Glassmorphic List) -->
+        <div class="tools-floating-menu" id="floating-tools">
+            <h4 class="toolbox-floating-title">AI TOOLBOX</h4>
+            <div class="tool-icon-btn-row" onclick="selectTool('document')">
+                <span class="tool-icon">📝</span>
+                <span class="tool-label">Document Analyzer</span>
             </div>
-            <div class="toolbox-content">
-                <div class="tool-item" onclick="selectTool('document')">
-                    <span class="tool-icon">📝</span>
-                    <span class="tool-label">Document Analyzer</span>
+            <div class="tool-icon-btn-row" onclick="selectTool('email')">
+                <span class="tool-icon">📧</span>
+                <span class="tool-label">Email Summarizer</span>
+            </div>
+            <div class="tool-icon-btn-row" onclick="selectTool('resume')">
+                <span class="tool-icon">💼</span>
+                <span class="tool-label">Resume Scanner</span>
+            </div>
+            <div class="tool-icon-btn-row" onclick="selectTool('project')">
+                <span class="tool-icon">📊</span>
+                <span class="tool-label">Project Analyzer</span>
+            </div>
+            <div class="tool-icon-btn-row" onclick="selectTool('linkedin')">
+                <span class="tool-icon">🔗</span>
+                <span class="tool-label">LinkedIn Generator</span>
+            </div>
+        </div>
+
+        <!-- LAYER 3: Main UI Panels -->
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="logo_green_robot.png" alt="AI Logo" class="logo-icon">
+                        <div class="logo-text">
+                            <h1>Bhuvi AI Assistant</h1>
+                            <p class="header-subtext">AI DASHBOARD</p>
+                            <!-- ISSUE 7: Status Indicator -->
+                            <span class="status-indicator-header online" id="system-status-indicator">● Online</span>
+                        </div>
+                        <!-- Sidebar Toggle -->
+                    </div>
+
+                    <!-- Profile Section inside Header -->
+                    <!-- Right Actions Group -->
+                    <div class="header-right-actions"
+                        style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                        <!-- Sidebar Toggle Button (Right Side) -->
+                        <button class="toolbox-toggle-header" onclick="toggleToolbox()" title="Toggle Sidebar">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="9" y1="3" x2="9" y2="21"></line>
+                            </svg>
+                        </button>
+
+                        <!-- Profile Section -->
+                        <div class="profile-section" onclick="toggleProfileDropdown()" style="margin-left: 0;">
+                            <div class="user-profile-chip">
+                                <span class="user-avatar-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </span>
+                                <span class="user-name">Bhuvi</span>
+                                <svg class="chevron-down" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                            <!-- Dropdown Menu -->
+                            <div class="profile-dropdown" id="profile-dropdown">
+                                <div class="dropdown-header">
+                                    <div class="user-details">
+                                        <span class="name">Bhuvi</span>
+                                        <span class="role">Administrator</span>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item" onclick="createSettingsModal(); event.stopPropagation();">
+                                    <span class="icon">⚙️</span> Settings
+                                </button>
+                                <button class="dropdown-item" onclick="createSystemLog(); event.stopPropagation();">
+                                    <span class="icon">🔔</span> Notifications
+                                    <span class="badge">3</span>
+                                </button>
+                                <button class="dropdown-item" onclick="toggleDevMode(); event.stopPropagation();">
+                                    <span class="icon">👨‍💻</span> Dev Mode
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item logout">
+                                    <span class="icon">🚪</span> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="tool-item" onclick="selectTool('email')">
-                    <span class="tool-icon">📧</span>
-                    <span class="tool-label">Email Summarizer</span>
+            </header>
+
+
+
+            <!-- Helper Text Removed for Cleanliness -->
+
+            <!-- Floating Tools Removed (Cleaned) -->
+
+            <!-- Chat Container -->
+            <!-- Chat Container -->
+            <!-- Main Chat Container (Wrapper for Shell) -->
+            <main class="chat-container">
+                <!-- ISSUE 6: History Placeholder (Left Side) -->
+                <!-- Phase 41: Glassmorphism History Panel -->
+                <div class="history-glass-panel" id="history-panel-left">
+                    <div class="history-header">
+                        <h3 class="history-title">Chat History</h3>
+                        <p class="history-subtitle">Recent chats</p>
+                    </div>
+                    <!-- Divider handled by CSS border-bottom -->
+                    <div class="history-list">
+                        <div class="history-item">
+                            <span class="item-title">Chatbot UX Review</span>
+                            <span class="item-meta">Today</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="item-title">Stipend internship opportunity</span>
+                            <span class="item-meta">Yesterday</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="item-title">Project Thesis Outline</span>
+                            <span class="item-meta">Last week</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="tool-item" onclick="selectTool('resume')">
-                    <span class="tool-icon">💼</span>
-                    <span class="tool-label">Resume Scanner</span>
+
+                <!-- Chat Shell: The Glass Anchor -->
+                <div class="chat-shell">
+
+                    <!-- 1. Header Area within Shell -->
+                    <div class="shell-header">
+                        <div class="mode-label-internal" id="mode-label">
+                            <span class="status-dot"></span>
+                            <span id="mode-text">Chat Assistant</span>
+                        </div>
+                        <div class="shell-divider"></div>
+                    </div>
+
+                    <!-- 2. Chat Area -->
+                    <div class="messages" id="messages">
+                        <!-- Empty State (Welcome Message) -->
+                        <div class="empty-state" id="empty-state">
+                            <h1 class="welcome-title">👋 Hi Bhuvi</h1>
+                            <p class="welcome-subtitle">Ask me anything or select a tool to begin.</p>
+                        </div>
+                        <!-- Messages will appear here -->
+                    </div>
+
+                    <!-- 3. Integrated Suggestions (Restored) -->
+                    <!-- 3. Integrated Suggestions (Removed per request) -->
+                    <!-- <div class="prompt-chips" id="prompt-chips"></div> -->
+
+                    <!-- 4. Integrated Input Area -->
+                    <div class="input-container">
+                        <div class="input-wrapper">
+                            <!-- New Attach Button -->
+                            <button class="attach-btn" title="Upload File"
+                                onclick="document.getElementById('file-upload').click()">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                                    </path>
+                                </svg>
+                            </button>
+
+                            <textarea id="message-input" spellcheck="false"
+                                placeholder="Ask me anything... (e.g. 'Check my emails', 'Create a LinkedIn post')"
+                                rows="1"></textarea>
+
+                            <button class="voice-mode-btn" title="Voice Command">
+                                <div class="voice-waves">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                                <!-- Better Icon: Simple Filled Mic -->
+                                <svg class="mic-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 14C14.2091 14 16 12.2091 16 10V5C16 2.79086 14.2091 1 12 1C9.79086 1 8 2.79086 8 5V10C8 12.2091 9.79086 14 12 14Z"
+                                        opacity="0.9" />
+                                    <path
+                                        d="M19 10V11C19 14.866 15.866 18 12 18C8.13401 18 5 14.866 5 11V10H3V11C3 15.5306 6.33782 19.2662 10.6667 19.8911V21.6667H13.3333V19.8911C17.6622 19.2662 21 15.5306 21 11V10H19Z" />
+                                </svg>
+                            </button>
+
+                            <div class="send-button-wrapper">
+                                <button id="send-button" class="send-button" aria-label="Send message">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-hint">
+                            Press Enter to send • Shift + Enter for new line
+                        </div>
+                    </div>
                 </div>
-                <div class="tool-item" onclick="selectTool('project')">
-                    <span class="tool-icon">📊</span>
-                    <span class="tool-label">Project Analyzer</span>
+                <!-- End of Chat Shell -->
+
+                <!-- RAG Upload Zone (Hidden by default, kept outside or inside? Best inside or overlay) -->
+                <!-- Keeping outside for now to avoid cluttering shell logic unless needed -->
+                <div id="upload-zone" class="upload-zone hidden">
+                    <div class="upload-content">
+                        <p>Drag & Drop PDF / TXT</p>
+                        <input type="file" id="file-upload" hidden accept=".pdf,.txt,.md,.png,.jpg,.jpeg,.webp"
+                            onchange="handleFileUpload(this)">
+                    </div>
                 </div>
-                <div class="tool-item" onclick="selectTool('linkedin')">
-                    <span class="tool-icon">🔗</span>
-                    <span class="tool-label">LinkedIn Generator</span>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Command Palette Modal -->
+    <div class="command-palette" id="commandPalette">
+        <div class="command-backdrop" onclick="closeCommandPalette()"></div>
+        <div class="command-modal">
+            <div class="command-header">
+                <input type="text" id="commandInput" placeholder="Type a command or search..." autocomplete="off">
+                <button class="command-close" onclick="closeCommandPalette()">×</button>
+            </div>
+            <div class="command-list" id="commandList">
+                <div class="command-item" data-command="summarize">
+                    <span class="command-icon">📄</span>
+                    <div class="command-info">
+                        <div class="command-name">/summarize</div>
+                        <div class="command-desc">Summarize a document or text</div>
+                    </div>
                 </div>
-                <div class="tool-item" onclick="selectTool('brain')">
-                    <span class="tool-icon">🧠</span>
-                    <span class="tool-label">Personal Brain</span>
+                <div class="command-item" data-command="linkedin">
+                    <span class="command-icon">💼</span>
+                    <div class="command-info">
+                        <div class="command-name">/generate linkedin post</div>
+                        <div class="command-desc">Create a LinkedIn post</div>
+                    </div>
+                </div>
+                <div class="command-item" data-command="resume">
+                    <span class="command-icon">📋</span>
+                    <div class="command-info">
+                        <div class="command-name">/analyze resume</div>
+                        <div class="command-desc">Analyze resume content</div>
+                    </div>
+                </div>
+                <div class="command-item" data-command="project">
+                    <span class="command-icon">🚀</span>
+                    <div class="command-info">
+                        <div class="command-name">/create project idea</div>
+                        <div class="command-desc">Generate project ideas</div>
+                    </div>
+                </div>
+                <div class="command-item" data-command="theme">
+                    <span class="command-icon">🎨</span>
+                    <div class="command-info">
+                        <div class="command-name">/switch theme</div>
+                        <div class="command-desc">Change color theme</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LAYER 3: Main UI Panels -->
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="logo_green_robot.png" alt="AI Logo" class="logo-icon">
-                    <div class="logo-text">
-                        <h1>Bhuvi AI Assistant</h1>
-                        <p>YOUR PERSONAL AI SECRETARY</p>
-                    </div>
+    <!-- SETUP WIZARD MODAL (First Run Experience) -->
+    <div class="setup-modal" id="setupWizard" style="display: none;">
+        <div class="setup-content">
+            <div class="setup-header">
+                <h2>🚀 Access Internal Systems</h2>
+                <p>Verify your credentials to initialize the AI Core.</p>
+            </div>
+
+            <div class="setup-step active" id="step1">
+                <div class="input-group">
+                    <label>Gemini API Key (Required)</label>
+                    <input type="password" id="apiKeyInput" placeholder="AIzaSy..." class="glass-input">
+                    <span class="input-hint">Used for core reasoning engine.</span>
                 </div>
-        </header>
 
-        <!-- Module Status Badges -->
-        <div class="modules-status">
-            <div class="module-badge" data-mode="rag" onclick="selectMode('rag')" title="Standard RAG Mode">
-                <span class="badge-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
-                </span>
-                <span class="badge-label">RAG Engine</span>
-            </div>
-            <div class="module-badge" data-mode="gmail" onclick="selectMode('gmail')" title="Email Intelligence Mode">
-                <span class="badge-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </span>
-                <span class="badge-label">Gmail</span>
-            </div>
-            <div class="module-badge" data-mode="linkedin" onclick="selectMode('linkedin')"
-                title="LinkedIn Growth Mode">
-                <span class="badge-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                    </svg>
-                </span>
-                <span class="badge-label">LinkedIn</span>
-            </div>
-            <div class="module-badge active" data-mode="chat" onclick="selectMode('chat')" title="General AI Chat Mode">
-                <span class="badge-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                </span>
-                <span class="badge-label">Chat</span>
-            </div>
-        </div>
-
-        <!-- Chat Container -->
-        <main class="chat-container">
-            <div class="messages" id="messages">
-                <!-- Welcome Message -->
-                <div class="message assistant-message welcome-message">
-                    <div class="message-avatar">🤖</div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <span class="message-author">Bhuvi AI Assistant</span>
-                            <span class="message-time" id="welcome-time"></span>
-                        </div>
-                        <div class="message-text">
-                            <h3>👋 Welcome! I'm your personal AI assistant.</h3>
-                            <p>I can help you with:</p>
-                            <ul>
-                                <li><strong>📚 Document Intelligence</strong> - Search your resume, projects, and
-                                    personal documents</li>
-                                <li><strong>📧 Email Management</strong> - Summarize your inbox and draft replies</li>
-                                <li><strong>💼 LinkedIn Content</strong> - Generate professional posts, captions, and
-                                    comments
-                                </li>
-                                <li><strong>💬 General Assistance</strong> - Answer questions and provide insights</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="input-group">
+                    <label>OpenAI Key (Optional)</label>
+                    <input type="password" id="openaiKeyInput" placeholder="sk-..." class="glass-input">
+                    <span class="input-hint">For advanced fallback models.</span>
                 </div>
-            </div>
-        </main>
 
-        <!-- Input Area -->
-        <div class="input-container">
-            <div class="input-wrapper">
-                <textarea id="message-input"
-                    placeholder="Ask me anything... (e.g. 'Check my emails', 'Create a LinkedIn post')"
-                    rows="1"></textarea>
-
-                <!-- Send Button with Unique Animation -->
-                <div class="send-button-wrapper">
-                    <div class="pulse-ring"></div>
-                    <div class="pulse-ring pulse-ring-2"></div>
-                    <div class="pulse-ring pulse-ring-3"></div>
-                    <button id="send-button" class="send-button" aria-label="Send message">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                        </svg>
+                <div class="setup-actions">
+                    <button class="primary-btn" onclick="saveApiKeys()">
+                        <span class="icon">🔌</span> Connect Core
+                    </button>
+                    <button class="text-btn" onclick="startDemoMode()">
+                        Enter Demo Mode (Offline)
                     </button>
                 </div>
-            </div>
-            <div class="input-footer">
-                <span class="char-count"><span id="char-count">0</span>/2000</span>
             </div>
         </div>
     </div>
 
     <!-- Scripts -->
+    <!-- PHASE 21: Offline / Demo Mode Overlay -->
+    <div id="offline-overlay" class="offline-overlay" style="display: none;">
+        <div class="status-card">
+            <div class="status-icon">🤖</div>
+            <h2>Assistant is offline</h2>
+            <p>Running in demo mode. Backend connection unavailable.</p>
+            <div class="status-actions">
+                <button class="primary-btn" onclick="retryBackend()">Retry Connection</button>
+                <button class="secondary-btn" onclick="enableDemo()">Continue in Demo Mode</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

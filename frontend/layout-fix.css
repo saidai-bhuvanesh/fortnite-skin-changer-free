@@ -1,0 +1,110 @@
+/* ========================================
+   LAYOUT FIX - PROPER STRUCTURE
+   ======================================== */
+
+/* Fix 1: Toolbox Panel - Start BELOW Navbar */
+.toolbox-panel {
+    top: 80px !important;
+    /* Start below navbar */
+    transform: none !important;
+    height: calc(100vh - 80px) !important;
+}
+
+/* Fix 2: Proper Z-Index Hierarchy */
+.header {
+    z-index: 100 !important;
+}
+
+.ai-toolbox {
+    z-index: 90 !important;
+}
+
+.toolbox-panel {
+    z-index: 90 !important;
+}
+
+.feature-cards {
+    z-index: 10 !important;
+    position: relative;
+}
+
+.chat-container {
+    z-index: 5 !important;
+}
+
+/* Fix 3: Feature Cards - Proper Spacing and Grid */
+.feature-cards {
+    margin-top: 40px !important;
+    /* Space from navbar */
+    margin-bottom: 30px !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    /* 5 equal columns */
+    gap: 16px !important;
+    padding: 0 !important;
+}
+
+/* Fix 4: Container Spacing */
+.container {
+    padding-top: 20px !important;
+}
+
+/* Fix 5: Toolbox Slide-out Behavior */
+.ai-toolbox.open .toolbox-panel {
+    left: 0 !important;
+    /* Slide from left edge */
+}
+
+.toolbox-panel {
+    left: -260px !important;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Fix 6: Prevent Overlap */
+.hologram-grid-overlay {
+    z-index: 0 !important;
+}
+
+.bg-dim {
+    z-index: 0 !important;
+}
+
+/* Fix 7: Responsive Feature Cards */
+@media (max-width: 1200px) {
+    .feature-cards {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .feature-cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+        margin-top: 20px !important;
+    }
+
+    .toolbox-panel {
+        top: 60px !important;
+        height: calc(100vh - 60px) !important;
+    }
+}
+
+/* Fix 8: Clean Layout Hierarchy */
+body {
+    overflow-x: hidden !important;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+/* Fix 9: Module Badges Spacing */
+.modules-status {
+    margin-top: 0 !important;
+    margin-bottom: 24px !important;
+}
+
+/* Fix 10: Chat Container Spacing */
+.chat-container {
+    margin-top: 0 !important;
+}

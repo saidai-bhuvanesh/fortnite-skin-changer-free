@@ -1,0 +1,59 @@
+/* ========================================
+   LAYER ARCHITECTURE (Strict Stacking)
+   ======================================== */
+
+.background-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.25;
+    pointer-events: none;
+    /* Ensure no background elements intercept clicks */
+}
+
+.decor-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* Decor layer allows clicks to pass through to App UI if using pointer-events: none, 
+       but we want to make sure robot doesn't block. 
+       Since robot is visual only, pointer-events: none is correct. */
+}
+
+.app-ui {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    /* Re-enable pointer events for UI */
+}
+
+/* Robot positioning within Decor Layer */
+.robot-fore {
+    position: absolute;
+    /* Adjusted from fixed, as it is now inside relative/fixed parent */
+    right: 20px;
+    bottom: 0px;
+    /* Ensure it doesn't overlap chat */
+    z-index: 1;
+    /* Local z-index */
+}
+
+/* Hide Robot on Smaller Screens to prevent overlap */
+@media (max-width: 1200px) {
+
+    .decor-layer,
+    .robot-fore {
+        display: none !important;
+    }
+}
+
+/* Isolate Chat Visually */
+.chat-rail {
+    /* Optional: If you want to use this class instead of .chat-container styles, 
+       but we already styled .chat-container. 
+       Let's reinforce .chat-container isolation here if needed. */
+}

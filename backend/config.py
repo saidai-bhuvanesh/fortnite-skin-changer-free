@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     
     # Server Configuration
     api_host: str = "0.0.0.0"
-    api_port: int = 5000
+    api_port: int = 8000
     cors_origins: str = "http://localhost:3000,http://localhost:8080,http://127.0.0.1:5500,http://localhost:5500"
     
     # Logging
@@ -56,7 +56,7 @@ class Settings(BaseSettings):
     # RAG Configuration
     rag_chunk_size: int = 1000
     rag_chunk_overlap: int = 200
-    rag_top_k: int = 5
+    rag_top_k: int = 3
     rag_docs_path: str = "./docs"
     
     class Config:

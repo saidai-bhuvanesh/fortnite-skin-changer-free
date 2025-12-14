@@ -1,0 +1,66 @@
+/* ========================================
+   TOOLBOX TOGGLE IN HEADER (TOP-LEFT)
+   ======================================== */
+
+.toolbox-toggle-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-left: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toolbox-toggle-header svg {
+    color: #00f7ff;
+    transition: transform 0.3s ease;
+}
+
+.toolbox-toggle-header:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(0, 247, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.toolbox-toggle-header:hover svg {
+    transform: rotate(90deg);
+}
+
+.ai-toolbox.open .toolbox-toggle-header {
+    background: rgba(0, 247, 255, 0.15);
+    border-color: rgba(0, 247, 255, 0.4);
+}
+
+/* Hide old floating toggle */
+.toolbox-toggle {
+    display: none !important;
+}
+
+/* Adjust logo layout for button */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .toolbox-toggle-header span {
+        display: none;
+    }
+
+    .toolbox-toggle-header {
+        padding: 8px;
+        margin-left: 12px;
+    }
+}
