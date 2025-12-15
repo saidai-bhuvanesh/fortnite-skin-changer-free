@@ -443,14 +443,17 @@ function setWelcomeTime() {
 
 // Check backend status
 // Check backend status
-async function checkBackendStatus() {
+// Check backend status with Retry Logic (Phase 68)
+async function checkBackendStatus(retryCount = 0) {
     // PHASE 23: Stop checks if locked
     if (!backendChecksEnabled) return;
 
-    console.log("Checking backend status...");
+    // Only log on first attempt to avoid spam
+    if (retryCount === 0) console.log("Checking backend status...");
+
     try {
         const controller = new AbortController();
-        const id = setTimeout(() => controller.abort(), 3000); // 3s timeout per JSON
+        const id = setTimeout(() => controller.abort(), 5000); // Increased to 5s for grace
 
         const response = await fetch(`${API_URL}/health`, { signal: controller.signal });
         clearTimeout(id);
@@ -459,12 +462,22 @@ async function checkBackendStatus() {
             updateStatus('Online', true);
             hideOfflineOverlay();
         } else {
-            console.warn("Backend returned non-OK status");
-            showOfflineState();
+            console.warn(`Backend returned non-OK status (Attempt ${retryCount + 1})`);
+            if (retryCount < 2) {
+                // Retry twice before failing
+                setTimeout(() => checkBackendStatus(retryCount + 1), 1000);
+            } else {
+                showOfflineState();
+            }
         }
     } catch (error) {
-        console.error("Backend check failed:", error);
-        showOfflineState();
+        console.error(`Backend check failed (Attempt ${retryCount + 1}):`, error);
+        if (retryCount < 2) {
+            // Retry twice before failing
+            setTimeout(() => checkBackendStatus(retryCount + 1), 1000);
+        } else {
+            showOfflineState();
+        }
     }
 }
 
@@ -1211,8 +1224,9 @@ window.toggleDevMode = () => {
 };
 window.saveApiKeys = saveApiKeys;
 window.startDemoMode = startDemoMode;
-window.toggleProfileDropdown = toggleProfileDropdown;
+
 window.toggleToolbox = toggleToolbox;
+window.applySettings = applySettings;
 
 // ========================================
 // PHASE 54: ROBUST FILE PREVIEW (ABOVE INPUT)
@@ -1673,3 +1687,86 @@ window.handleFileUpload = function (input) {
         `;
     }
 };
+// ========================================
+// SETTINGS MODAL FUNCTIONALITY
+// ========================================
+
+// Default settings
+
+
+// Load settings from localStorage or use defaults
+
+
+
+
+
+// Close settings modal
+
+
+// Populate settings from saved values
+
+
+// Apply settings to the application
+function applySettings(settings) {
+    // Apply dev mode
+    if (settings.devMode) {
+        isDevMode = true;
+        console.log('Developer mode enabled');
+    } else {
+        isDevMode = false;
+    }
+
+    // Apply other settings as needed
+    // This can be extended based on your application's needs
+}
+
+// Clear chat history
+
+
+
+
+// Delete all data
+function deleteAllData() {
+    if (confirm('⚠️ WARNING: This will delete ALL your data including chat history, settings, and preferences. This cannot be undone. Are you absolutely sure?')) {
+        if (confirm('Final confirmation: Delete everything?')) {
+            localStorage.clear();
+            showToolNotification('All data deleted. Reloading...');
+            setTimeout(() => location.reload(), 1500);
+        }
+    }
+}
+
+// Update slider values in real-time
+document.addEventListener('DOMContentLoaded', () => {
+    // Temperature slider
+    const tempSlider = document.getElementById('temperature');
+    const tempValue = document.getElementById('temperatureValue');
+    if (tempSlider && tempValue) {
+        tempSlider.addEventListener('input', (e) => {
+            tempValue.textContent = (e.target.value / 100).toFixed(1);
+        });
+    }
+
+    // Speech rate slider
+    const speechSlider = document.getElementById('speechRate');
+    const speechValue = document.getElementById('speechRateValue');
+    if (speechSlider && speechValue) {
+        speechSlider.addEventListener('input', (e) => {
+            speechValue.textContent = (e.target.value / 100).toFixed(1) + 'x';
+        });
+    }
+
+    // Load settings on page load
+    const settings = loadSettings();
+    applySettings(settings);
+});
+
+// Export functions to window for HTML onclick handlers
+window.openProfileSettings = openProfileSettings;
+window.closeSettings = closeSettings;
+window.toggleSetting = toggleSetting;
+window.saveSettings = saveSettings;
+window.resetSettings = resetSettings;
+window.clearChatHistory = clearChatHistory;
+window.exportChatData = exportChatData;
+window.deleteAllData = deleteAllData;

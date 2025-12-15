@@ -64,33 +64,41 @@ Edit `.env` file to change settings:
 
 ---
 
-## 🎨 Features
+## 🎨 New Features (Final Release)
 
-✨ Ultra-premium 3D holographic UI
-⚡ Fast responses (2-3 seconds with gemma2:2b)
-🌌 Floating hexagons and particle effects
-💎 Glassmorphism design
-🎯 RAG, Gmail, LinkedIn integration
+✨ **Rich File Preview**: Upload PDFs, Excel, Word, or Images and get instant color-coded identification (Red/Green/Blue cards).
+✨ **Holographic Voice Mode**: Click the microphone to see a 3D Audio Visualizer while you speak.
+✨ **Smart Shortcuts**: Type "hlo", "hi", "help" for instant responses.
+✨ **Robust Connection**: Backend now auto-retries connection failures without crashing the UI.
 
 ---
 
 ## 💡 Tips
 
-- Keep backend running in background
-- Use `monitor_backend.py` for auto-restart
-- Refresh browser if status shows offline
-- Backend auto-reloads on code changes
+- **Shortcuts**: Type "hlo" to wake up the bot instantly.
+- **Voice**: Click the Mic icon 🎙️ to use speech-to-text.
+- **Files**: Drag & Drop or click the Paperclip 📎 to analyze documents.
+- **Backend Monitor**: Run `monitor_backend.py` to ensure 24/7 uptime.
 
 ---
 
-## 🆘 Need Help?
+## 🆘 Troubleshooting
 
-Check logs:
+### Backend Shows "Reconnecting..."
+1. Don't panic! The system will auto-retry 3 times.
+2. If it persists, check if the backend terminal is open.
+3. Restart using `start_backend.bat`.
+
+### Voice Not Working?
+- Ensure you are using Chrome/Edge.
+- Check microphone permissions.
+
+### Check Logs
 - Backend: `backend/logs/app.log`
 - LLM: `backend/logs/llm_chat.log`
 
 Backend should show:
 ```
-✅ Initialized Ollama (unlimited local AI): gemma2:2b
+✅ All modules initialized successfully!
 INFO: Uvicorn running on http://0.0.0.0:8000
 ```

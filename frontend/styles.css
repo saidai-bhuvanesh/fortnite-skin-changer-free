@@ -1857,7 +1857,7 @@ body::after {
         /* Vertical lines */
         linear-gradient(0deg, transparent 0%, transparent 48%, rgba(76, 201, 240, 0.5) 49%, rgba(76, 201, 240, 0.5) 51%, transparent 52%, transparent 100%),
         /* Dots at intersections */
-        radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.8) 2px, transparent 2px);
+        radial-gradient(circle at 50% 50%, transparent 1px, rgba(0, 255, 127, 0.8) 1px, rgba(0, 255, 127, 0.8) 2px, transparent 2px);
     background-size: 100px 100px, 100px 100px, 100px 100px;
     background-position: 0 0, 0 0, 0 0;
     animation: circuitFlow 20s linear infinite;
@@ -2157,10 +2157,11 @@ body::after {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--cyan-glow);
+    background: transparent;
+    border: 2px solid rgba(0, 255, 127, 0.9);
     box-shadow:
-        0 0 20px var(--cyan-glow),
-        inset 0 0 10px rgba(255, 255, 255, 0.5);
+        0 0 20px rgba(0, 255, 127, 0.6),
+        inset 0 0 10px rgba(0, 255, 127, 0.3);
     animation: dotPulse 1.5s ease-in-out infinite;
 }
 
@@ -6274,4 +6275,549 @@ body {
     min-height: 40px !important;
     /* Match button visual height */
     align-self: center !important;
+}
+
+/* ========================================
+   PHASE 76: INPUT AREA UI POLISH
+   Improved alignment, spacing, and visual consistency
+   ======================================== */
+
+/* Input Container - Better Structure */
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 247, 255, 0.25);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-container:focus-within {
+    border-color: rgba(0, 247, 255, 0.5);
+    box-shadow: 0 0 24px rgba(0, 247, 255, 0.2),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    background: rgba(15, 23, 42, 0.95);
+}
+
+/* Attach Button - Consistent Sizing */
+.attach-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 247, 255, 0.08);
+    border: 1px solid rgba(0, 247, 255, 0.2);
+    border-radius: 10px;
+    color: #00f7ff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+.attach-btn:hover {
+    background: rgba(0, 247, 255, 0.15);
+    border-color: rgba(0, 247, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 247, 255, 0.2);
+}
+
+.attach-btn:active {
+    transform: translateY(0);
+}
+
+.attach-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Message Input - Clean and Aligned */
+#message-input {
+    flex: 1;
+    min-height: 40px;
+    max-height: 120px;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #e0e6ed;
+    font-size: 14px;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+    line-height: 1.5;
+    resize: none;
+    overflow-y: auto;
+}
+
+#message-input::placeholder {
+    color: rgba(224, 230, 237, 0.4);
+    font-size: 14px;
+}
+
+#message-input::-webkit-scrollbar {
+    width: 4px;
+}
+
+#message-input::-webkit-scrollbar-thumb {
+    background: rgba(0, 247, 255, 0.3);
+    border-radius: 2px;
+}
+
+/* Voice Button - Matching Attach Button */
+.voice-mode-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 247, 255, 0.08);
+    border: 1px solid rgba(0, 247, 255, 0.2);
+    border-radius: 10px;
+    color: #00f7ff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+    position: relative;
+}
+
+.voice-mode-btn:hover {
+    background: rgba(0, 247, 255, 0.15);
+    border-color: rgba(0, 247, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 247, 255, 0.2);
+}
+
+.voice-mode-btn.active {
+    background: rgba(0, 247, 255, 0.2);
+    border-color: #00f7ff;
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
+}
+
+.voice-mode-btn .mic-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.voice-waves {
+    display: none;
+}
+
+.voice-mode-btn.active .voice-waves {
+    display: flex;
+    gap: 2px;
+    position: absolute;
+}
+
+.voice-waves span {
+    width: 2px;
+    height: 12px;
+    background: #00f7ff;
+    border-radius: 1px;
+    animation: wave 0.6s ease-in-out infinite;
+}
+
+.voice-waves span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.voice-waves span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.voice-waves span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        height: 8px;
+    }
+
+    50% {
+        height: 16px;
+    }
+}
+
+/* Send Button - Premium Gradient */
+.send-button-wrapper {
+    flex-shrink: 0;
+}
+
+.send-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00f7ff 0%, #00bcd4 100%);
+    border: none;
+    border-radius: 10px;
+    color: #0a0f1e;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 247, 255, 0.3);
+}
+
+.send-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 247, 255, 0.5);
+}
+
+.send-button:active {
+    transform: translateY(0);
+}
+
+.send-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Keyboard Shortcut Hint */
+.input-hint {
+    position: absolute;
+    bottom: -24px;
+    right: 0;
+    font-size: 11px;
+    color: rgba(224, 230, 237, 0.3);
+    font-family: 'Segoe UI', sans-serif;
+    pointer-events: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .input-container {
+        gap: 8px;
+        padding: 12px 16px;
+    }
+
+    .attach-btn,
+    .voice-mode-btn,
+    .send-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    #message-input {
+        font-size: 13px;
+    }
+}
+
+/* ========================================
+   PHASE 77: HEADER ALIGNMENT FIX
+   Perfect vertical centering and spacing
+   ======================================== */
+
+/* Header Container - Better Structure */
+.header {
+    padding: 20px 40px !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(0, 247, 255, 0.2) !important;
+}
+
+.header-content {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 24px !important;
+}
+
+/* Logo Section - Perfect Alignment */
+.logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+}
+
+.logo-icon {
+    width: 48px !important;
+    height: 48px !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+    border-radius: 12px !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 247, 255, 0.3)) !important;
+}
+
+/* Logo Text Container - Vertical Stack */
+.logo-text {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    justify-content: center !important;
+}
+
+.logo-text h1 {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: linear-gradient(135deg, #ffffff, #e0e6ed) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.header-subtext {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 1.5px !important;
+    color: rgba(0, 247, 255, 0.6) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+}
+
+/* Status Indicator - Inline with Subtext */
+.status-indicator-header {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 12px !important;
+    border-radius: 12px !important;
+    background: rgba(0, 255, 127, 0.08) !important;
+    border: 1px solid rgba(0, 255, 127, 0.5) !important;
+    margin-top: 8px !important;
+    line-height: 1 !important;
+}
+
+.status-indicator-header.online {
+    color: rgba(0, 255, 127, 0.95) !important;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Header Right Actions - Perfect Alignment */
+.header-right-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-left: auto !important;
+}
+
+/* Toolbox Toggle Button */
+.toolbox-toggle-header {
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(0, 247, 255, 0.08) !important;
+    border: 1px solid rgba(0, 247, 255, 0.2) !important;
+    border-radius: 10px !important;
+    color: #00f7ff !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    padding: 0 !important;
+}
+
+.toolbox-toggle-header:hover {
+    background: rgba(0, 247, 255, 0.15) !important;
+    border-color: rgba(0, 247, 255, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.toolbox-toggle-header svg {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+/* User Profile Chip - Better Alignment */
+.user-profile-chip {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 8px 16px !important;
+    background: rgba(0, 247, 255, 0.08) !important;
+    border: 1px solid rgba(0, 247, 255, 0.2) !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    height: 40px !important;
+}
+
+.user-profile-chip:hover {
+    background: rgba(0, 247, 255, 0.15) !important;
+    border-color: rgba(0, 247, 255, 0.4) !important;
+}
+
+.user-profile-chip .profile-avatar {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #00f7ff, #00bcd4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #0a0f1e !important;
+}
+
+.user-profile-chip .profile-name {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #e0e6ed !important;
+    line-height: 1 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header {
+        padding: 16px 20px !important;
+    }
+
+    .logo-icon {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .logo-text h1 {
+        font-size: 18px !important;
+    }
+
+    .header-subtext {
+        font-size: 10px !important;
+    }
+
+    .user-profile-chip .profile-name {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   PHASE 78: PROFILE DROPDOWN ENHANCEMENT
+   Better styling and danger state for logout
+   ======================================== */
+
+/* Profile Dropdown - Enhanced Styling */
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 240px;
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(0, 247, 255, 0.25) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 247, 255, 0.15) !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.profile-dropdown.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Dropdown Header */
+.dropdown-header {
+    padding: 16px !important;
+    border-bottom: 1px solid rgba(0, 247, 255, 0.15) !important;
+}
+
+.dropdown-header .user-details {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+
+.dropdown-header .name {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #e0e6ed !important;
+}
+
+.dropdown-header .role {
+    font-size: 12px !important;
+    color: rgba(0, 247, 255, 0.7) !important;
+    font-weight: 500 !important;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 16px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #cbd5e1 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 247, 255, 0.08) !important;
+    color: #e0e6ed !important;
+}
+
+.dropdown-item .icon {
+    font-size: 16px !important;
+    width: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Danger State for Logout */
+.dropdown-item.danger {
+    color: #ef4444 !important;
+}
+
+.dropdown-item.danger:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #f87171 !important;
+}
+
+/* Dropdown Divider */
+.dropdown-divider {
+    height: 1px !important;
+    background: rgba(0, 247, 255, 0.15) !important;
+    margin: 4px 0 !important;
+}
+
+/* Chevron Animation */
+.profile-section.active .chevron-down {
+    transform: rotate(180deg) !important;
+}
+
+.chevron-down {
+    transition: transform 0.25s ease !important;
 }
